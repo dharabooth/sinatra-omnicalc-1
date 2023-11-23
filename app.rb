@@ -16,3 +16,15 @@ get("/square/results") do
  
   erb(:square_results)
 end
+
+get("/square_root/new") do
+  erb(:square_root)
+end
+
+get("/square_root/results") do
+  @root_num = params.fetch("user_number")
+
+  @num_rooted = params.fetch("user_number").to_f ** 0.5
+
+  erb(:root_results)
+end
