@@ -28,3 +28,20 @@ get("/square_root/results") do
 
   erb(:root_results)
 end
+
+get("/payment/new") do
+  erb(:payment)
+end
+
+get("/payment/results") do
+  @apr = params.fetch("user_apr").to_f / (100*12)
+  @term = params.fetch("user_years").to_f * 12
+  @principal = params.fetch("user_pv").to_f
+  
+  @numerator = @apr * @principal
+  @denominator = 1 - ((1 + @apr) ** (-1 * @term))
+
+  @payment_calc = @numerator / @denominator
+
+  erb(:payment_results)
+end
